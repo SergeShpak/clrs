@@ -1,5 +1,9 @@
 package sorting
 
+import (
+	"reflect"
+)
+
 type ISortable interface {
 	Compare(ISortable) int
 }
@@ -16,10 +20,18 @@ func (this IntSortable) Compare(that ISortable) int {
 	return this.Value - thatIntSortable.Value
 }
 
-func ConvertToISortable(sortables []IntSortable) []ISortable {
-	result := make([]ISortable, len(sortables))
-	for i, el := range sortables {
-		result[i] = ISortable(el)
+func ToISortable(objects interface{}) []ISortable {
+	if reflect.TypeOf(objects).Kind() != reflect.Slice {
+		panic("Object passed to ToISortable function must be a slice")
+	}
+	sortables := reflect.ValueOf(objects)
+	result := make([]ISortable, sortables.Len())
+	var ok bool
+	for i := 0; i < sortables.Len(); i++ {
+		result[i], ok = sortables.Index(i).Interface().(ISortable)
+		if !ok {
+			panic("Attempt to cast objects that do not implement ISortable to ISortable")
+		}
 	}
 	return result
 }
