@@ -5,14 +5,14 @@ import (
 	"testing"
 )
 
-func Test_InsertionSort_Sort_Sanity(t *testing.T) {
+func Test_SelectionSort_Sort_Sanity(t *testing.T) {
 	first := sorting.IntSortable{Value: 30}
 	second := sorting.IntSortable{20}
 	third := sorting.IntSortable{10}
 	fourth := sorting.IntSortable{0}
 	sortables := []sorting.IntSortable{first, second, third, fourth}
 	genericSortables := sorting.ToISortable(sortables)
-	sorter := sorting.InsertionSorter{}
+	sorter := sorting.SelectionSorter{}
 	sorter.Sort(genericSortables, sorting.Ascending)
 	result := sorting.ISortableToIntSortable(genericSortables)
 	expected := []sorting.IntSortable{fourth, third, second, first}

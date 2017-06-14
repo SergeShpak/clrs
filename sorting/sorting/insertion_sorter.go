@@ -1,7 +1,6 @@
 package sorting
 
-type InsertionSorter struct {
-}
+type InsertionSorter struct{}
 
 func (sorter InsertionSorter) Sort(sortables []ISortable, order Order) []ISortable {
 	for i := 1; i < len(sortables); i++ {
