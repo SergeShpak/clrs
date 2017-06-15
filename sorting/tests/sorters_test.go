@@ -34,3 +34,11 @@ func Test_InsertionSort_Sort_Sanity(t *testing.T) {
 		t.Error(err)
 	}
 }
+
+func Test_SelectionSort_Sort_Sanity(t *testing.T) {
+	sorter := sorting.SelectionSorter{}
+	err := InternalTest_SortSanity(sorting.ISorter(sorter))
+	if err != nil {
+		t.Error(err)
+	}
+}
