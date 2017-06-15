@@ -1,10 +1,13 @@
-package sorting
+package testsorting
 
+/*
 import (
 	"github.com/SergeyShpak/clrs/sorting/sorting"
 	"testing"
 )
+*/
 
+/*
 func Test_SelectionSort_Sort_Sanity(t *testing.T) {
 	first := sorting.IntSortable{Value: 30}
 	second := sorting.IntSortable{20}
@@ -22,3 +25,4 @@ func Test_SelectionSort_Sort_Sanity(t *testing.T) {
 		}
 	}
 }
+*/

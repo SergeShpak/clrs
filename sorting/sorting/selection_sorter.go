@@ -2,6 +2,7 @@ package sorting
 
 type SelectionSorter struct{}
 
+/*
 func (sorter SelectionSorter) Sort(sortables []ISortable, order Order) []ISortable {
 	for i, _ := range sortables {
 		swapIndex := i
@@ -25,3 +26,4 @@ func (sorter SelectionSorter) Sort(sortables []ISortable, order Order) []ISortab
 	}
 	return sortables
 }
+*/

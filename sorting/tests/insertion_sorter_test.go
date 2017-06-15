@@ -1,24 +1,36 @@
-package sorting
+package testsorting
 
 import (
+	"errors"
+	"fmt"
 	"github.com/SergeyShpak/clrs/sorting/sorting"
+	"sort"
 	"testing"
 )
 
-func Test_InsertionSort_Sort_Sanity(t *testing.T) {
-	first := sorting.IntSortable{Value: 30}
-	second := sorting.IntSortable{20}
-	third := sorting.IntSortable{10}
-	fourth := sorting.IntSortable{0}
-	sortables := []sorting.IntSortable{first, second, third, fourth}
-	genericSortables := sorting.ToISortable(sortables)
-	sorter := sorting.InsertionSorter{}
-	sorter.Sort(genericSortables, sorting.Ascending)
-	result := sorting.ISortableToIntSortable(genericSortables)
-	expected := []sorting.IntSortable{fourth, third, second, first}
+func InternalTest_SortSanity(sorter sorting.ISorter) error {
+	sortables := sorting.CreateIntSortables(31, 41, 59, 26, 41, 58)
+	genericSortables := sorting.ToISortables(sortables)
+	sorter.Sort(genericSortables)
+	result := sorting.ToIntSortables(genericSortables)
+	expected := sortables.Copy()
+	copy(sortables, expected)
+	sort.Sort(expected)
 	for i, el := range result {
-		if el.Compare(expected[i]) != 0 {
-			t.Errorf("Test failed: %d != %d (index: %d)", el, expected[i], i)
+		if el != expected[i] {
+			errMsg := fmt.Sprintf("Test failed: Actual %d != Expected %d (index: %d)",
+				el, expected[i], i)
+			err := errors.New(errMsg)
+			return err
 		}
+	}
+	return nil
+}
+
+func Test_InsertionSort_Sort_Sanity(t *testing.T) {
+	sorter := sorting.InsertionSorter{}
+	err := InternalTest_SortSanity(sorting.ISorter(sorter))
+	if err != nil {
+		t.Error(err)
 	}
 }
