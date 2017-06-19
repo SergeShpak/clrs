@@ -8,6 +8,8 @@ type ISortables interface {
 	Len() int
 	Less(i, j int) bool
 	Swap(i, j int)
+	Get(i int) interface{}
+	Set(i int, val interface{})
 }
 
 /*
@@ -66,6 +68,14 @@ func (this IntSortables) Less(i, j int) bool {
 
 func (this IntSortables) Swap(i, j int) {
 	this[i], this[j] = this[j], this[i]
+}
+
+func (this IntSortables) Get(i int) interface{} {
+	return this[i]
+}
+
+func (this IntSortables) Set(i int, val interface{}) {
+	this[i] = val.(int)
 }
 
 func CreateIntSortables(ints ...int) IntSortables {

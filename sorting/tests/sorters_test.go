@@ -42,3 +42,11 @@ func Test_SelectionSort_Sort_Sanity(t *testing.T) {
 		t.Error(err)
 	}
 }
+
+func Test_MergeSort_Sort_Sanity(t *testing.T) {
+	sorter := sorting.MergeSorter{}
+	err := InternalTest_SortSanity(sorting.ISorter(sorter))
+	if err != nil {
+		t.Error(err)
+	}
+}
